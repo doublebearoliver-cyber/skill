@@ -22,6 +22,44 @@ cd ~/.mavis/agents/mavis/skills/fangwei-perspective
 git pull
 ```
 
+## 多平台支持
+
+本仓库同时输出以下平台的适配版本，**内容与 Mavis Skill 完全一致**，由 `convert.py` 自动生成：
+
+| 平台 | 文件 | 使用方式 |
+|------|------|---------|
+| **Mavis** | `fangwei-perspective/SKILL.md` | 放入 `~/.mavis/agents/<agent>/skills/` |
+| **Claude Code** | `exports/claude.md` | 放入项目 `.claude/` 目录 |
+| **OpenAI GPTs** | `exports/gpts-instructions.txt` | 复制到 Assistant 的 Instructions 字段 |
+| **Cursor / Codex** | `exports/cursorrules` | 放入项目根目录 |
+| **Coze** | `exports/coze-prompt.txt` | 复制到 Bot 的提示词中 |
+
+### 各平台详细说明
+
+**Claude Code**
+```bash
+# 在项目目录中
+mkdir -p .claude/commands
+cp exports/claude.md .claude/commands/fangwei.md
+```
+
+**OpenAI GPTs**
+打开 https://chat.openai.com/gpts/edit → 粘贴 `exports/gpts-instructions.txt` 的全部内容到 Instructions。
+
+**Cursor / Codex**
+将 `exports/cursorrules` 的全部内容粘贴到项目的 `.cursorrules` 文件。
+
+**Coze**
+打开 Coze Bot 编辑页面 → 粘贴 `exports/coze-prompt.txt` 的全部内容到提示词。
+
+## 重新生成多平台文件
+
+如果修改了 `SKILL.md`，重新运行转换脚本：
+
+```bash
+python3 convert.py
+```
+
 ## 触发方式
 
 - "用方伟的视角分析 X"
